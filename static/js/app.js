@@ -6,6 +6,17 @@ const dataPromise = d3.json(url);
 console.log("Data Promise: ", dataPromise);
 
 // Fetch the JSON data and console log it
+let meta_data
+let samples
 d3.json(url).then(function(data) {
-  console.log(data);
+    console.log(data);
+    let selector = d3.select("#selDataset");
+    meta_data = data.metadata;
+    samples = data.samples;
+    console.log("Samples:",samples);
+    data.names.forEach((id) => {
+        selector.append("option").text(id).property("value", id); 
+    });
 });
+console.log("Samples:",samples);
+
