@@ -20,6 +20,7 @@ d3.json(url).then(function(data) {
     });
     barChart(samples[0])
     bubbleChart(samples[0]);
+    demographicInfoFunction(metaData[0]);
 });
 
 function barChart(selection) {
@@ -45,13 +46,16 @@ function barChart(selection) {
 }
 
 function optionChanged(value) {
-    const selection = samples.find((object) => object.id === value);
-
+    const selection = samples.find((object) => object.id == value);
+    const metaSelection = metaData.find((object) => object.id == value);
     // Bar Chart
     barChart(selection);
 
-    // Bubblew Chart
+    // Bubble Chart
      bubbleChart(selection);
+
+     // Demographic Info
+     demographicInfoFunction(metaSelection);
 }
 
 function barChart(selection) {
@@ -102,4 +106,21 @@ function bubbleChart(selection) {
   
     // Create the bubble chart
     Plotly.newPlot('bubble', data, layout);
+}
+
+function demographicInfoFunction(selection) {
+  let demographicInfoSelection = d3.select("#sample-metadata");
+
+  demographicInfoSelection.html(
+  `id: ${selection.id} <br>
+  ethnicity: ${selection.id} <br>
+  gender: ${selection.gender} <br>
+  age: ${selection.age} <br>
+  location: ${selection.location} <br>
+  bbtype: ${selection.bbtype} <br>
+  wfreq: ${selection.wfreq} <br>
+  `
+
+
+  );
 }
