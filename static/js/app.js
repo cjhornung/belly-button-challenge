@@ -42,4 +42,11 @@ function barChart(selection) {
 
 }
 
+function optionChanged(value) {
+    const selection = samples.find((object) => object.id === value);
+
+    // Bar Chart
+    barChart(selection);
+}
+
 
