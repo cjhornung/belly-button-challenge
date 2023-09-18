@@ -18,7 +18,7 @@ d3.json(url).then(function(data) {
     data.names.forEach((id) => {
         selector.append("option").text(id).property("value", id); 
     });
-    barChart(samples)
+    barChart(samples[0])
 });
 
 function barChart(selection) {
@@ -26,15 +26,15 @@ function barChart(selection) {
     var data = [{
         type: 'bar',
         orientation: 'h', // Set the orientation to horizontal
-        x: [10, 20, 15, 25], // Data for the horizontal bars
-        y: ['Label 1', 'Label 2', 'Label 3', 'Label 4'], // Labels for the bars
+        x: selection.sample_values.slice(0, 10).reverse(), // Data for the horizontal bars
+        y: selection.otu_ids.slice(0,10).map(id => `OTU ${id}`).reverse(), // Labels for the bars
       }];
 
   // Layout configuration for the chart
   var layout = {
-    title: 'Horizontal Bar Chart Example',
-    xaxis: { title: 'Values' }, // X-axis title
-    yaxis: { title: 'Labels' }, // Y-axis title
+    title: 'Top 10 OTUs',
+    xaxis: { title: 'sample_values' }, // X-axis title
+    yaxis: { title: 'otu_id' }, // Y-axis title
   };
 
   // Create the horizontal bar chart in the specified container
