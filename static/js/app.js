@@ -19,6 +19,7 @@ d3.json(url).then(function(data) {
         selector.append("option").text(id).property("value", id); 
     });
     barChart(samples[0])
+    bubbleChart(samples[0]);
 });
 
 function barChart(selection) {
@@ -48,6 +49,57 @@ function optionChanged(value) {
 
     // Bar Chart
     barChart(selection);
+
+    // Bubblew Chart
+     bubbleChart(selection);
 }
 
+function barChart(selection) {
+    // Data for the horizontal bar chart
+    var data = [{
+        type: 'bar',
+        orientation: 'h', // Set the orientation to horizontal
+        x: selection.sample_values.slice(0, 10).reverse(), // Data for the horizontal bars
+        y: selection.otu_ids.slice(0,10).map(id => `OTU ${id}`).reverse(), // Labels for the bars
+        text: selection.otu_labels.slice(0,10).reverse(),
+    }];
 
+  // Layout configuration for the chart
+  var layout = {
+    title: 'Top 10 OTUs',
+    xaxis: { title: 'sample_values' }, // X-axis title
+    yaxis: { title: 'otu_id' }, // Y-axis title
+  };
+
+  // Create the horizontal bar chart in the specified container
+  Plotly.newPlot('bar', data, layout);
+
+}
+
+function bubbleChart(selection) {
+    // Data for a bubble chart
+    var data = [
+    {
+        type: "scatter",
+        x: selection.otu_ids, // X-axis values
+        y: selection.sample_values, // Y-axis values
+        mode: "markers", // Set the mode to 'markers' for a bubble chart
+        marker: {
+            size: selection.sample_values, // Size of bubbles
+            color: selection.otu_ids, // Color of bubbles
+            colorscale: 'Viridis', // Color scale for the bubbles
+            text: selection.otu_labels, // Hover text
+        },
+    },
+  ];
+  
+    // Layout configuration for the chart
+    var layout = {
+    title: 'OTU Bubble Chart',
+    xaxis: { title: 'otu_ids' },
+    yaxis: { title: 'sample_values' },
+    };
+  
+    // Create the bubble chart
+    Plotly.newPlot('bubble', data, layout);
+}
