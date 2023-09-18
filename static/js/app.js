@@ -28,7 +28,8 @@ function barChart(selection) {
         orientation: 'h', // Set the orientation to horizontal
         x: selection.sample_values.slice(0, 10).reverse(), // Data for the horizontal bars
         y: selection.otu_ids.slice(0,10).map(id => `OTU ${id}`).reverse(), // Labels for the bars
-      }];
+        text: selection.otu_labels.slice(0,10).reverse(),
+    }];
 
   // Layout configuration for the chart
   var layout = {
