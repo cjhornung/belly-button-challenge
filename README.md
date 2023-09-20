@@ -23,3 +23,6 @@ A bubble chart that displays each sample.
 Each key-value pair from the metadata JSON object are displayed in the Demographic Info box
 
 All the plots update when a new sample is selected
+
+## References
+Hulcr, J. et al. (2012) A Jungle in There: Bacteria in Belly Buttons are Highly Diverse, but Predictable. Retrieved from: http://robdunnlab.com/projects/belly-button-biodiversity/results-and-data/Links to an external site.
